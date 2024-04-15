@@ -220,4 +220,19 @@
     z-index: 1;
   }
   }
+  @media (max-width: 400px) {
+    .card-details h1 {
+    font-weight: 300;
+    position: absolute;
+    z-index: 2;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 295px;
+    background: #1a1a1a;
+    top: 75%;
+    left: 8%;
+    padding: 10px;
+    text-align: center;
+  }
+  }
 </style>
