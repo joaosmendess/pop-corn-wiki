@@ -53,7 +53,7 @@
 		{#each mediaItems as item}
 			<div class="card-wrapper">
 				<div  class="card-image">
-					<img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
+					<img loading="lazy" src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
 					<h2>{item.title} ({item.media_type.toUpperCase()})</h2>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    background: #000;
+    background: #0b0c12;
     color: #fff; /* Define a cor do texto para branco */
     font-family: 'Poppins', sans-serif;
     height: 100%; /* Garante que o fundo cubra toda a altura */
@@ -83,14 +83,15 @@
 }
 .card-wrapper {
     display: flex;
-    flex-direction: column; /* Alinha itens verticalmente */
+    align-content: center;
     justify-content: center; 
     align-items: center; 
-    background-color: #171717;
+    background-color: #1a1a1a;
     border-radius: .71rem;
     width: 75%; /* Ajuste para melhor visualização em desktop */
     padding: .5rem;
     height: auto; /* Altura automática para se adaptar ao conteúdo */
+	margin-left: 30px;
 }
 
 h1 {
@@ -108,6 +109,12 @@ h2 {
     border-radius: .71rem;
     height: auto;
     object-fit: cover;
+    transition: transform 0.3s ease; /* Adiciona uma transição suave */
+	cursor: pointer;
+}
+
+.card-image img:hover {
+    transform: scale(1.05); /* Move a imagem 10px para cima */
 }
 
 @media (max-width: 768px) { /* Ajustes para telas menores que 768px */
