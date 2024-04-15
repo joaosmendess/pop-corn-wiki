@@ -17,12 +17,12 @@
 
 			const apiKey = 'b3fad328fadefd997a6ee64e219ac9cd';
 			const baseUrl = 'https://api.themoviedb.org/3';
-			const movieResponse = await fetch(`${baseUrl}/movie/popular?api_key=${apiKey}`);
+			const movieResponse = await fetch(`${baseUrl}/movie/popular?api_key=${apiKey}&language=pt-BR`);
 			const movies = await movieResponse.json();
 
 			//tvshow
 
-			const tvResponse = await fetch(`${baseUrl}/tv/popular?api_key=${apiKey}`);
+			const tvResponse = await fetch(`${baseUrl}/tv/popular?api_key=${apiKey}&language=pt-BR`);
 			const tvShows = await tvResponse.json();
 
 			mediaItems = [

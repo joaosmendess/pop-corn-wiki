@@ -11,6 +11,7 @@
         color: #fff; /* Texto branco, se necessário */
         font-family: 'Poppins', sans-serif;
         height: 100%; /* Garante que o fundo cubra toda a altura */
+        overflow-x: hidden;  
     }
 </style>
 
