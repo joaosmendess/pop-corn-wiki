@@ -10,7 +10,8 @@
 	};
 	let mediaItems: MediaItem[] = [];
 	let itemCount: number = 0;
-
+    let search = '';
+    let filteredItems: MediaItem[] = [];
 	async function fetchMedia() {
 		try {
 			//movies
@@ -41,10 +42,15 @@
 				}))
 			];
 			itemCount= mediaItems.length;
+			filteredItems = mediaItems;
 		} catch (error) {
 			console.error('Error fetching media', error);
 		}
 	}
+$: filteredItems = mediaItems.filter(item=> item.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
+$:itemCount = filteredItems.length;
+
+
 	onMount(fetchMedia);
 </script>
 
@@ -54,12 +60,17 @@
 </svelte:head>
 
 <main>
-	<h1>Popular Media</h1>
+
+	<h1>🍿Wiki</h1>
+	<div class="input-container">
+	
+		<input type="text" placeholder="Procure por algum filme ou série em alta..." bind:value={search} />
+	</div>
 	<section class="aside">
 		<h2>Em alta no momento 🔥 ({itemCount})  </h2>
 	</section>
 	<div class="grid">
-		{#each mediaItems as item}
+		{#each filteredItems as item}
 		<a href={`/details?id=${item.id}&type=${item.media_type}`}>
 
 			<div class="card-wrapper">
@@ -110,6 +121,23 @@
     height: auto; /* Altura automática para se adaptar ao conteúdo */
 	margin-left: 30px;
 	
+}
+input {
+    color: #ffff; 
+	width: 30%;
+	height: 44px;
+	border: 2px solid #ccc;
+	background-color: #0b0c12;
+	border-radius: 12px;
+	padding: 10px;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	
+	}
+.input-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 a{
 	text-decoration: none;
@@ -173,6 +201,7 @@ img {
     margin-right: 5px;
 }
 
+
 @media (max-width: 768px) { 
     .grid {
         grid-template-columns: 1fr; 
@@ -185,5 +214,17 @@ img {
     h2 {
         font-size: 1rem; 
     }
+	input {
+    color: #ffff; 
+	width: 60%;
+	height: 44px;
+	border: 2px solid #ccc;
+	background-color: #0b0c12;
+	border-radius: 12px;
+	padding: 10px;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	
+	}
 }
 </style>

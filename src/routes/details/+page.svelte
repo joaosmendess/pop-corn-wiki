@@ -39,6 +39,10 @@
       console.error('Missing parameters: id or type');
     }
   });
+
+  function goBack() {
+    window.history.back();
+  }
 </script>
 
 <svelte:head>
@@ -48,13 +52,18 @@
 </svelte:head>
 
 <main>
+  <button on:click={goBack} class="back-button">
+    &#8592; 
+  </button>
   {#if mediaDetail && mediaDetail.poster_path}
   <div class="banner-image">
-    <img class="img-header" src={`https://image.tmdb.org/t/p/w500${mediaDetail.poster_path}`} alt={mediaDetail.title || 'No title'}>
+    <img class="img-header" src={`https://image.tmdb.org/t/p/w500${mediaDetail.poster_path}`} alt={mediaDetail.title || 'titulo nao encontrado'}>
+    <div class="card-details">
+
+      <h1>{mediaDetail.title || 'No Title'}</h1>
+    </div>
   </div>
-  <aside class="card-details">
-    <h1>{mediaDetail.title || 'No Title'}</h1>
-  </aside>
+
   <div class="grid">
     <section>
       <img class="img-details" src={`https://image.tmdb.org/t/p/original${mediaDetail.backdrop_path || mediaDetail.poster_path}`} alt={mediaDetail.title || 'No title'}>
@@ -87,10 +96,11 @@
   .banner-image {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     width: 65vw;
     border-radius: 2.5rem;
-    background: #FFFFFF;
+  text-align: center;
     margin: 35px auto;
   }
   .grid {
@@ -108,16 +118,17 @@
   }
   .card-details h1 {
     font-weight: 300;
-    position: absolute;
-    z-index: 2;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+    
     border-radius: 24px;
     width: 100%;
     max-width: 375px;
     background: #1a1a1a;
-    top: 60%;
-    left: 20%;
+   
     padding: 30px;
-    text-align: left;
+    text-align: center;
   }
   .card-rating {
     width: 20%;
@@ -140,7 +151,7 @@
     text-align: center;
   }
   .img-details {
-    height: 45rem;
+    height: 40rem;
     margin-top: 15px;
     border-radius: .71rem;
     width: 30rem;
@@ -155,27 +166,53 @@
     margin-right: 5px;
     background-color: transparent;
   }
+  .back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1000;
+}
+
+@media (max-width: 480px) {
+  .back-button {
+    font-size: 14px;
+    padding: 8px 16px;
+    top: 10px;
+    left: 10px;
+  }
+}
   @media (max-width: 480px) {
     .grid {
       grid-template-columns: 350px;
       padding: 1px;
     }
     .card-details h1 {
+      display: flex;
     font-weight: 300;
-    position: absolute;
-    z-index: 2;
+    
+justify-content: baseline;
+align-items: baseline;
     border-radius: 24px;
     width: 100%;
-    max-width: 295px;
+   
     background: #1a1a1a;
-    top: 64%;
-    left: 4%;
+    
+   
     padding: 10px;
     text-align: center;
   }
     .banner-image {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: auto; 
       width: 100vw;
       border-radius: 0rem;
@@ -221,18 +258,9 @@
   }
   }
   @media (max-width: 400px) {
-    .card-details h1 {
-    font-weight: 300;
-    position: absolute;
-    z-index: 2;
-    border-radius: 24px;
-    width: 100%;
-    max-width: 295px;
-    background: #1a1a1a;
-    top: 75%;
-    left: 8%;
-    padding: 10px;
-    text-align: center;
+    .card-details  {
+ text-align: center;
+   
   }
   }
 </style>
